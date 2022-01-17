@@ -1,7 +1,5 @@
 
-// On Load
-
-// Retrieve Current Date
+// Data
 let date = new Date();
 let today = new Date().toLocaleDateString('en-CA')
 let weekAgo = new Date(date.getFullYear(), date.getMonth(), date.getDate()-7).toLocaleDateString('en-CA');
@@ -9,7 +7,7 @@ let weekAgo = new Date(date.getFullYear(), date.getMonth(), date.getDate()-7).to
 // Log Current Date
 console.log("Today's Date:", today);
 
-// Date Picker Input Added
+// Dynamic Input Implementation
 document.getElementById('date-picker').innerHTML = ('<div class="date-input"><label for="datemin">Start Date:</label> <input type="date" id="datemin" name="dateselect" min="2020-01-01" max="' + today + '" required></div> <div class="date-input"> <label for="datemax">End Date:</label><input type="date" id="datemax" name="dateselect" max="' + today + '" required></div>')
 
 
@@ -18,7 +16,7 @@ document.getElementById('date-picker').innerHTML = ('<div class="date-input"><la
 // Re-fetch API between provided dates
 fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJpnhb5WO5Xgz&start_date=' + weekAgo + '&end_date=' + today + '&thumbs=True')
   
-.then(function (response){  //JS promise structure and response
+.then(function (response){  //Promise Structure and Response
   return response.json();    //Return data
 })
 
@@ -26,19 +24,17 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJ
 
   document.getElementById('cards').innerHTML = ('<div class="container-fluid"><div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-xl-3" id="row"></div></div>');
 
-// trigger for days between dates
-for (i = 0; i < 8; i++){
+  // trigger for days between dates
+  for (i = 0; i < 8; i++){
 
-  // If APOD is a video, use the provided thumbnail
-  if (imageData[i].media_type == 'video') { 
-    document.getElementById('row').innerHTML += ('<div class="col"><div id="nasa-card" class="card"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
-  } else { 
-    document.getElementById('row').innerHTML += ('<div class="col"><div id="nasa-card" class="card"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
-  }
-} 
+    // If APOD is a video, use the provided thumbnail
+    if (imageData[i].media_type == 'video') { 
+      document.getElementById('row').innerHTML += ('<div class="col"><div id="nasa-card" class="card"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
+    } else { 
+      document.getElementById('row').innerHTML += ('<div class="col"><div id="nasa-card" class="card"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
+    }
+  } 
 })
-
-
 
 
 
