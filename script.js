@@ -125,6 +125,11 @@ $form.addEventListener('submit', function (e) {
 
 
 // Implement Like button (toggle classes, possible liked page for user, may need to create array with liked images)
-
+//  Set end date minimum to result of start date
+// ^    
+// works as a temp fix 
+// if(minDate > maxDate){
+//   console.log("its bigger");
+// }
 
 

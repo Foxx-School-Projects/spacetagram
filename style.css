@@ -32,6 +32,7 @@ body{
 
 form .btn{
   margin-top: 1em;
+  border-radius: 5px;
   font-size: 1rem;
   width: 100%;
 }
@@ -44,7 +45,7 @@ form label{
 }
 
 form input{
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1.5px solid #b1b1b1;
   padding: 8px;
   width: 100%;
