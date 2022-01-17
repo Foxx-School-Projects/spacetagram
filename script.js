@@ -1,35 +1,30 @@
-
 // Data
 let date = new Date();
 let today = new Date().toLocaleDateString('en-CA')
 let weekAgo = new Date(date.getFullYear(), date.getMonth(), date.getDate()-7).toLocaleDateString('en-CA');
 
-// Log Current Date
-console.log("Today's Date:", today);
-
-// Dynamic Input Implementation
+// Dynamic Date Input Implementation
 document.getElementById('date-picker').innerHTML = ('<div class="date-input"><label for="datemin">Start Date:</label> <input type="date" id="datemin" name="dateselect" min="2020-01-01" max="' + today + '" required></div> <div class="date-input"> <label for="datemax">End Date:</label><input type="date" id="datemax" name="dateselect" max="' + today + '" required></div>')
 
+// ======== Load Past Week of API Data ===========
 
-// ======== Load Past Week of APOD ===========
-
-// Re-fetch API between provided dates
+// Fetch API between provided dates
 fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJpnhb5WO5Xgz&start_date=' + weekAgo + '&end_date=' + today + '&thumbs=True')
   
-.then(function (response){  //Promise Structure and Response
-  return response.json();    //Return data
+.then(function (response){
+  return response.json(); 
 })
 
 .then(function (imageData){   //JSON data captured in this parameter
 
-  document.getElementById('grid-container').innerHTML = ('<div class="card-grid container-fluid"><div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-xl-3" id="row"></div></div>');
-
-  // trigger for days between dates
+  // trigger for days between dates including current day
   for (i = 0; i < 8; i++){
 
     // If APOD is a video, use the provided thumbnail
     if (imageData[i].media_type == 'video') { 
       document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' + '</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
+    
+      // otherwise function as expected
     } else { 
       document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' +'</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
     }
@@ -43,22 +38,13 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJ
 let minDate;
 let $minInput = document.getElementById('datemin');
 
-// when clicked
-$minInput.addEventListener('click', function () {
-
-// Cannot be later than existing date maximum
-  if (document.getElementById("datemax").max !== null) { 
-    document.getElementById("datemin").max = maxDate;
-  }
-
-});
 
 // When date inputs detect change
 $minInput.addEventListener('change', function () {
     
     minDate = $minInput.value;
     console.log('Minimum date is', minDate)
-
+    document.getElementById("datemax").min = minDate;
 });
 
 
@@ -66,17 +52,14 @@ $minInput.addEventListener('change', function () {
 let maxDate;
 let $maxInput = document.getElementById('datemax');
 
-// Cannot be earlier than existing date minimum
-$maxInput.addEventListener('click', function () {
-  document.getElementById("datemax").min = minDate;
-});
-
 // When date inputs detect change
 $maxInput.addEventListener('change', function () {
     
     maxDate = $maxInput.value;
     console.log('Maximum date is', maxDate)
-    
+
+    // Set minimum date for first input to selected maximum
+    document.getElementById("datemin").max = maxDate;
 
 });
 
@@ -124,12 +107,14 @@ $form.addEventListener('submit', function (e) {
     // trigger for days between dates
     for (i = 0; i < (dayDiff + 1); i++){
 
-      // If APOD is a video, use the provided thumbnail
-      if (imageData[i].media_type == 'video') { 
-        document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' + '</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
-      } else { 
-        document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' +'</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
-      }
+    // If APOD is a video, use the provided thumbnail
+    if (imageData[i].media_type == 'video') { 
+      document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' + '</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
+    
+      // otherwise function as expected
+    } else { 
+      document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' +'</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
+    }
     } 
 
 
