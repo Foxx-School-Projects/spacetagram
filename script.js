@@ -6,13 +6,11 @@ let date = new Date();
 let today = new Date().toLocaleDateString('en-CA')
 let weekAgo = new Date(date.getFullYear(), date.getMonth(), date.getDate()-7).toLocaleDateString('en-CA');
 
-console.log(weekAgo)
-
 // Log Current Date
 console.log("Today's Date:", today);
 
 // Date Picker Input Added
-document.getElementById('date-picker').innerHTML = ('<div class="date-input"><label for="datemin">Start Date:</label> <input type="date" id="datemin" name="dateselect" min="2020-01-01" max="' + today + '" required></div> <div class="date-input"> <label for="datemax">End Date:</label><input type="date" id="datemax" name="dateselect" max="' + today + '" required></div>')
+document.getElementById('date-picker').innerHTML = ('<div class="date-input float-start"><label for="datemin">Start Date:</label> <input type="date" id="datemin" name="dateselect" min="2020-01-01" max="' + today + '" required></div> <div class="date-input"> <label for="datemax">End Date:</label><input type="date" id="datemax" name="dateselect" max="' + today + '" required></div>')
 
 
 // ======== Load Past Week of APOD ===========
@@ -26,7 +24,7 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJ
 
 .then(function (imageData){   //JSON data captured in this parameter
 
-  document.getElementById('cards').innerHTML = ('<div class="container-fluid"><div class="row row-cols-auto" id="row"></div></div>');
+  document.getElementById('cards').innerHTML = ('<div class="container-fluid"><div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-xl-3" id="row"></div></div>');
 
 // trigger for days between dates
 for (i = 0; i < 8; i++){
@@ -101,7 +99,7 @@ $form.addEventListener('submit', function (e) {
     countDays(minDate, maxDate);
 
     // Clear Current APOD
-    document.getElementById('cards').innerHTML = ('<div class="container-fluid"><div class="row" id="row"></div></div>');
+    document.getElementById('cards').innerHTML = ('<div class="container-fluid"><div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-xl-3" id="row"></div></div>');
 
     // Re-fetch API between provided dates
     fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJpnhb5WO5Xgz&start_date=' + minDate + '&end_date=' + maxDate + '&thumbs=True')

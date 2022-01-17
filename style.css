@@ -1,19 +1,15 @@
 
-html{
-  min-height: 100%;
-  padding-left: 2em;
-  padding-right: 2em;
-}
-
 /* Global Font Change */
 body{
-  color: white;
-  background-image: linear-gradient(45deg, #ec77ab 0%, #7873f5 100%);
+  margin-left: 4em;
+  margin-right: 4em;
+  color: black;
+  background-color: #f6f6f7;
   font-family: 'Inter', sans-serif;
-
 }
 
 .header{
+  margin-left: 1em;
   margin-top: 1em;
   margin-bottom: 1em;
 }
@@ -37,7 +33,8 @@ body{
 #nasa-card{
   border: none;
   color: black;
-  width: 25rem;
+  box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.2);
+  border: 1.5px solid #b1b1b1;
   height: 100%;
 }
 
@@ -50,37 +47,36 @@ body{
 }
 
 .card-text{
-  font-size: 0.8em;
+  font-size: 0.9rem;
 }
 
 .card-img-top {
-  height: 20em;
+  height: 25em;
   object-fit: cover;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
 }
 
 input{
-  border-radius: 15px;
+  border-radius: 10px;
   margin-right: 1em;
-  border: none;
+  border: 1.5px solid #b1b1b1;
   padding: 8px;
 }
 
-.date-input{
-  float: left;
+
+form{
+  margin-left: auto;
+  margin-right: auto;
 }
 
 form label{
   margin-right: 1em;
+  font-weight: bold;
 }
 
 form .btn{
-  display: block;
-}
-
-form{
-  margin-bottom: 1.5em;
+  font-size: 1.2rem;
 }
 
 footer{
