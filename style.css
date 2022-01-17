@@ -1,7 +1,6 @@
 
 /* General Adjustments */
 body{
-  margin: 1em;
   color: black;
   background-color: #f6f6f7;
   font-family: 'Inter', sans-serif;
@@ -62,7 +61,10 @@ form input{
 }
 
 .col{
-  margin-bottom: 1em;
+  margin-bottom: 2em;
+  margin-right: 0;
+  margin-left: 0;
+  padding: 0;
 }
 
 .card{
@@ -81,7 +83,11 @@ form input{
 
 /* Image Description Sizing */
 .card-text{
-  font-size: 0.9rem;
+  font-size: 0.875rem;
+}
+
+.card-title{
+  font-size: 1rem;
 }
 
 
@@ -98,6 +104,11 @@ footer{
 
   form .btn{
   width: 5em;
+  }
+
+  .col{
+   padding-left: 1em;
+   padding-right: 1em;
   }
 
 }
