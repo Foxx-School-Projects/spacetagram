@@ -1,33 +1,50 @@
 
 // On Load
+
+// Retrieve Current Date
+let date = new Date();
 let today = new Date().toLocaleDateString('en-CA')
+let weekAgo = new Date(date.getFullYear(), date.getMonth(), date.getDate()-7).toLocaleDateString('en-CA');
+
+console.log(weekAgo)
 
 // Log Current Date
 console.log("Today's Date:", today);
 
 // Date Picker Input Added
-document.getElementById('date-picker').innerHTML = ('<div class="date-min"><label for="datemin">Start Date</label> <input type="date" id="datemin" name="dateselect" min="2020-01-01" max="' + today + '" required></div> <div class="date-max"> <label for="datemax">End Date</label><input type="date" id="datemax" name="dateselect" max="' + today + '" required></div>')
+document.getElementById('date-picker').innerHTML = ('<div class="date-input"><label for="datemin">Start Date:</label> <input type="date" id="datemin" name="dateselect" min="2020-01-01" max="' + today + '" required></div> <div class="date-input"> <label for="datemax">End Date:</label><input type="date" id="datemax" name="dateselect" max="' + today + '" required></div>')
 
 
-// ==== NASA APOD | API KEY: sdcCicWmBL9lc51EcwZNp64dDHpMJpnhb5WO5Xgz
+// ======== Load Past Week of APOD ===========
 
-// Fetch API
-fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJpnhb5WO5Xgz&date=' + today + '&thumbs=True')
-  .then(function (response){  //JS promise structure and response
-    return response.json();    //Return data
-})
-.then(function (imageData){   //JSON data captured in this parameter
+// Re-fetch API between provided dates
+fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJpnhb5WO5Xgz&start_date=' + weekAgo + '&end_date=' + today + '&thumbs=True')
   
-    // Set Div Background Image
-    document.getElementById('cards').innerHTML += ('<div id="nasa-card" class="card"><img src=' + imageData.hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData.title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData.date + '</h6><p class="card-text">' + imageData.explanation + ' </p> </div></div>')
-});
+.then(function (response){  //JS promise structure and response
+  return response.json();    //Return data
+})
+
+.then(function (imageData){   //JSON data captured in this parameter
+
+// trigger for days between dates
+for (i = 0; i < 8; i++){
+
+  // If APOD is a video, use the provided thumbnail
+  if (imageData[i].media_type == 'video') { 
+    document.getElementById('cards').innerHTML += ('<div id="nasa-card" class="card"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div>')
+  } else { 
+    document.getElementById('cards').innerHTML += ('<div id="nasa-card" class="card"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div>')
+  }
+} 
+})
 
 
 
 
 
-// ======= EVENT LISTENERS FOR MIN MAX INPUT CHANGES =============
+// ======== Input Changes | Event Listener ===========
 
+// Min Date Declaration
 let minDate;
 let $minInput = document.getElementById('datemin');
 
@@ -40,7 +57,7 @@ $minInput.addEventListener('change', function () {
 });
 
 
-
+// Max Date Declaration
 let maxDate;
 let $maxInput = document.getElementById('datemax');
 
@@ -53,8 +70,9 @@ $maxInput.addEventListener('change', function () {
 });
 
 
-// Fuction to calculate days between two provided dates
+// ======== Calculate Difference Between Dates | Function ===========
 let dayDiff;
+
 function countDays(start, end) {
   const dateMin = new Date(start);
   const dateMax = new Date(end);
@@ -65,12 +83,11 @@ function countDays(start, end) {
 
   // Calculating # of days between provided dates
   dayDiff = Math.round(timeDiff / oneDay);
-
 }
 
 
 
-// ======== Form Submission ===========
+// ======== Form Submission | Event Listener ===========
 const $form = document.getElementById('form');
 
 $form.addEventListener('submit', function (e) {
@@ -78,34 +95,40 @@ $form.addEventListener('submit', function (e) {
     // Prevent Refresh
     e.preventDefault();
 
+    // Calculate day difference
     countDays(minDate, maxDate);
-    console.log('Day Difference', dayDiff)
 
-    // Trigger x Days between dates + 1
-
-    console.log("iterations")
+    // Clear Current APOD
     document.getElementById('cards').innerHTML = ('');
-    // Fetch API
+
+    // Re-fetch API between provided dates
     fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJpnhb5WO5Xgz&start_date=' + minDate + '&end_date=' + maxDate + '&thumbs=True')
   
     .then(function (response){  //JS promise structure and response
       return response.json();    //Return data
     })
+
     .then(function (imageData){   //JSON data captured in this parameter
 
+    // trigger for days between dates
     for (i = 0; i < (dayDiff + 1); i++){
-      console.log(imageData[i]);
-      document.getElementById('cards').innerHTML += ('<div id="nasa-card" class="card"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div>')
-    }
+
+      // If APOD is a video, use the provided thumbnail
+      if (imageData[i].media_type == 'video') { 
+        document.getElementById('cards').innerHTML += ('<div id="nasa-card" class="card"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div>')
+      } else { 
+        document.getElementById('cards').innerHTML += ('<div id="nasa-card" class="card"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div>')
+      }
+    } 
 
 
     });
 
-  });
+});
 
 
 
-
+// Implement Like button (toggle classes, possible liked page for user, may need to create array with liked images)
 
 
 
