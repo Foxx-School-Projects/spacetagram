@@ -34,7 +34,7 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJ
       document.getElementById('row').innerHTML += ('<div class="col"><div id="nasa-card" class="card"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
     }
   } 
-})
+}) 
 
 
 
