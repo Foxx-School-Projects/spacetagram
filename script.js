@@ -29,13 +29,12 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJ
 
     // If APOD is a video, use the provided thumbnail
     if (imageData[i].media_type == 'video') { 
-      document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card" class="col"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' + '</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
+      document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' + '</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
     } else { 
-      document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card" class="col"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' +'</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
+      document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' +'</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
     }
   } 
 }) 
-
 
 
 // ======== Input Changes | Event Listener ===========
@@ -43,6 +42,16 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJ
 // Min Date Declaration
 let minDate;
 let $minInput = document.getElementById('datemin');
+
+// when clicked
+$minInput.addEventListener('click', function () {
+
+// Cannot be later than existing date maximum
+  if (document.getElementById("datemax").max !== null) { 
+    document.getElementById("datemin").max = maxDate;
+  }
+
+});
 
 // When date inputs detect change
 $minInput.addEventListener('change', function () {
@@ -57,11 +66,17 @@ $minInput.addEventListener('change', function () {
 let maxDate;
 let $maxInput = document.getElementById('datemax');
 
+// Cannot be earlier than existing date minimum
+$maxInput.addEventListener('click', function () {
+  document.getElementById("datemax").min = minDate;
+});
+
 // When date inputs detect change
 $maxInput.addEventListener('change', function () {
     
     maxDate = $maxInput.value;
     console.log('Maximum date is', maxDate)
+    
 
 });
 
@@ -111,9 +126,9 @@ $form.addEventListener('submit', function (e) {
 
       // If APOD is a video, use the provided thumbnail
       if (imageData[i].media_type == 'video') { 
-        document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card" class="col"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' + '</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
+        document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' + '</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
       } else { 
-        document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card" class="col"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' +'</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
+        document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' +'</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
       }
     } 
 
@@ -125,12 +140,7 @@ $form.addEventListener('submit', function (e) {
 
 
 // Implement Like button (toggle classes, possible liked page for user, may need to create array with liked images)
-//  Set end date minimum to result of start date
-// ^    
-// works as a temp fix 
-// if(minDate > maxDate){
-//   console.log("its bigger");
-// }
+
 // More keyboard navigation needed
 
 
