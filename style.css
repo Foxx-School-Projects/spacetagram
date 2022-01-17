@@ -52,23 +52,19 @@ form input{
 
 
 /* Grid Item Adjustments */
-#nasa-card{
-  border: none;
-  color: black;
-  box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.2);
-  border: 1.5px solid #b1b1b1;
-  height: 100%;
+
+.card-container{
+margin-bottom: 2em;
+padding: 0;
 }
 
 .col{
-  margin-bottom: 2em;
   margin-right: 0;
   margin-left: 0;
-  padding: 0;
-}
-
-.card{
+  box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.2);
   border-radius: 7px;
+  border: 1.5px solid #b1b1b1;
+  height: 100%;
 }
 
 
@@ -106,9 +102,9 @@ footer{
   width: 5em;
   }
 
-  .col{
-   padding-left: 1em;
-   padding-right: 1em;
+  .card-container{
+    margin-bottom: 0;
+    padding: 1em;
   }
 
 }
