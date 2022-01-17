@@ -10,7 +10,7 @@ let weekAgo = new Date(date.getFullYear(), date.getMonth(), date.getDate()-7).to
 console.log("Today's Date:", today);
 
 // Date Picker Input Added
-document.getElementById('date-picker').innerHTML = ('<div class="date-input float-start"><label for="datemin">Start Date:</label> <input type="date" id="datemin" name="dateselect" min="2020-01-01" max="' + today + '" required></div> <div class="date-input"> <label for="datemax">End Date:</label><input type="date" id="datemax" name="dateselect" max="' + today + '" required></div>')
+document.getElementById('date-picker').innerHTML = ('<div class="date-input"><label for="datemin">Start Date:</label> <input type="date" id="datemin" name="dateselect" min="2020-01-01" max="' + today + '" required></div> <div class="date-input"> <label for="datemax">End Date:</label><input type="date" id="datemax" name="dateselect" max="' + today + '" required></div>')
 
 
 // ======== Load Past Week of APOD ===========
