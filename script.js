@@ -22,17 +22,86 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJ
 
     // If APOD is a video, use the provided thumbnail
     if (imageData[i].media_type == 'video') { 
-      document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' + '</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
+      document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' + '</h5> <p class="card-text">' + imageData[i].explanation + ' </p> <button type="button" class="btn btn-outline-primary likebutton" id="likebutton">Like</button> </div></div></div>')
     
       // otherwise function as expected
     } else { 
-      document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' +'</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
+      document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' +'</h5> <p class="card-text">' + imageData[i].explanation + ' </p>     <button type="button" class="btn btn-outline-primary likebutton" id="likebutton">Like</button> </div></div></div>')
     }
   } 
 }) 
 
 
-// ======== Input Changes | Event Listener ===========
+// ======== Like Buttons | Event Listeners ===========
+
+let likeButton;
+let selectedPost;
+const likedPost = [];    
+
+// On Click
+document.addEventListener('click', function (e) {
+
+  // Closest Like Button Selected
+  let selectedButton = e.target.closest('.likebutton');
+
+  // Classes Toggled on Button
+  if (selectedButton){
+
+    // Button Changes to Indicate Like
+    selectedButton.innerHTML = ('Liked!')
+    selectedButton.classList.toggle("btn-outline-primary");
+    selectedButton.classList.toggle("btn-warning");
+
+    // Target Liked Post
+    let selectedPost = e.target.closest('.card-container');
+
+    // Toggle 'liked' div for styling
+    selectedPost.classList.toggle("liked");
+
+    // Push post to array
+    likedPost.push(selectedPost);
+
+// stringify and local storage here
+
+  }
+})
+
+
+
+
+// ======== Favorites Display | Event Listeners ===========
+let favButton = document.getElementById('favbutton');
+
+// when clicked
+favButton.addEventListener('click', function () {
+    
+  // clear grid
+  document.getElementById("row").innerHTML = '';
+
+  // iterate depending on array length
+  for (i = 0; i < likedPost.length; i++){
+
+  // Print favorites to page
+  document.getElementById("row").innerHTML += likedPost[i].innerHTML;
+
+  }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ======== User Input | Event Listeners ===========
 
 // Min Date Declaration
 let minDate;
@@ -44,6 +113,8 @@ $minInput.addEventListener('change', function () {
     
     minDate = $minInput.value;
     console.log('Minimum date is', minDate)
+
+    // Set minimum date for second input to selected minimum
     document.getElementById("datemax").min = minDate;
 });
 
@@ -58,10 +129,12 @@ $maxInput.addEventListener('change', function () {
     maxDate = $maxInput.value;
     console.log('Maximum date is', maxDate)
 
-    // Set minimum date for first input to selected maximum
+    // Set maximum date for first input to selected maximum
     document.getElementById("datemin").max = maxDate;
 
 });
+
+
 
 
 // ======== Calculate Difference Between Dates | Function ===========
@@ -104,28 +177,26 @@ $form.addEventListener('submit', function (e) {
 
     .then(function (imageData){   //JSON data captured in this parameter
 
-    // trigger for days between dates
+    // trigger for days between dates including dates
     for (i = 0; i < (dayDiff + 1); i++){
 
-    // If APOD is a video, use the provided thumbnail
-    if (imageData[i].media_type == 'video') { 
-      document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' + '</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
-    
-      // otherwise function as expected
-    } else { 
-      document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' +'</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
-    }
+      // If APOD is a video, use the provided thumbnail
+      if (imageData[i].media_type == 'video') { 
+        document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' + '</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
+      
+        // otherwise function as expected
+      } else { 
+        document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' +'</h5> <p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
+      }
     } 
 
 
     });
-
 });
 
 
 
 // Implement Like button (toggle classes, possible liked page for user, may need to create array with liked images)
-
 // More keyboard navigation needed
 
 

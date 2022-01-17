@@ -30,7 +30,7 @@ body{
 /* Form Adjustments */
 
 form .btn{
-  margin-top: 1em;
+  margin-top: 0.5em;
   border-radius: 5px;
   font-size: 1rem;
   width: 100%;
@@ -67,6 +67,10 @@ padding: 0;
   height: 100%;
 }
 
+.row>* {
+  padding: 0;
+  margin-bottom: 1em;
+}
 
 /* Card Image Adjustments */
 .card-img-top {
@@ -92,7 +96,6 @@ footer{
   margin-top: 1em;
   margin-bottom: 1em;
 }
-
 
 
 @media (min-width: 768px) { 
