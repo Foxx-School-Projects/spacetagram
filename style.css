@@ -1,14 +1,20 @@
 
+/* General Adjustments */
 body{
+  margin: 1em;
   color: black;
   background-color: #f6f6f7;
   font-family: 'Inter', sans-serif;
 }
 
+
+/* Main Header Spacing Adjustment */
 .header{
   margin: 1em;
 }
 
+
+/* Gerneral Font Adjustments */
 .main-heading{
   font-weight: 600;
   font-size: 3rem;
@@ -21,24 +27,13 @@ body{
   letter-spacing: -.1rem;
 }
 
-/* Margin Botton on Grid Items */
-.col{
-  margin-bottom: 1em;
-}
 
-input{
-  border-radius: 10px;
-  border: 1.5px solid #b1b1b1;
-  padding: 8px;
-}
-
-.date-input{
-  margin-bottom: 1em;
-}
+/* Form Adjustments */
 
 form .btn{
+  margin-top: 1em;
   font-size: 1.2rem;
-  float: left;
+  width: 100%;
 }
 
 form label{
@@ -46,9 +41,17 @@ form label{
   margin-right: 1em;
   font-weight: bold;
   font-size: 1.2rem;
-  float: left;
 }
 
+form input{
+  border-radius: 10px;
+  border: 1.5px solid #b1b1b1;
+  padding: 8px;
+  width: 100%;
+}
+
+
+/* Grid Item Adjustments */
 #nasa-card{
   border: none;
   color: black;
@@ -57,10 +60,16 @@ form label{
   height: 100%;
 }
 
+.col{
+  margin-bottom: 1em;
+}
+
 .card{
   border-radius: 7px;
 }
 
+
+/* Card Image Adjustments */
 .card-img-top {
   height: 25em;
   object-fit: cover;
@@ -68,19 +77,18 @@ form label{
   border-top-right-radius: 7px;
 }
 
-#cards{
-  clear: left;
-}
 
+/* Image Description Sizing */
 .card-text{
   font-size: 0.9rem;
 }
 
+
+/* Footer Adjustments */
 footer{
   margin-top: 1em;
   margin-bottom: 1em;
 }
-
 
 
 
