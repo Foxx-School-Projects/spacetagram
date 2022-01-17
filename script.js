@@ -26,14 +26,16 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJ
 
 .then(function (imageData){   //JSON data captured in this parameter
 
+  document.getElementById('cards').innerHTML = ('<div class="container-fluid"><div class="row row-cols-auto" id="row"></div></div>');
+
 // trigger for days between dates
 for (i = 0; i < 8; i++){
 
   // If APOD is a video, use the provided thumbnail
   if (imageData[i].media_type == 'video') { 
-    document.getElementById('cards').innerHTML += ('<div id="nasa-card" class="card"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div>')
+    document.getElementById('row').innerHTML += ('<div class="col"><div id="nasa-card" class="card"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
   } else { 
-    document.getElementById('cards').innerHTML += ('<div id="nasa-card" class="card"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div>')
+    document.getElementById('row').innerHTML += ('<div class="col"><div id="nasa-card" class="card"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
   }
 } 
 })
@@ -99,7 +101,7 @@ $form.addEventListener('submit', function (e) {
     countDays(minDate, maxDate);
 
     // Clear Current APOD
-    document.getElementById('cards').innerHTML = ('');
+    document.getElementById('cards').innerHTML = ('<div class="container-fluid"><div class="row" id="row"></div></div>');
 
     // Re-fetch API between provided dates
     fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJpnhb5WO5Xgz&start_date=' + minDate + '&end_date=' + maxDate + '&thumbs=True')
@@ -115,9 +117,9 @@ $form.addEventListener('submit', function (e) {
 
       // If APOD is a video, use the provided thumbnail
       if (imageData[i].media_type == 'video') { 
-        document.getElementById('cards').innerHTML += ('<div id="nasa-card" class="card"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div>')
+        document.getElementById('row').innerHTML += ('<div class="col"><div id="nasa-card" class="card"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
       } else { 
-        document.getElementById('cards').innerHTML += ('<div id="nasa-card" class="card"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div>')
+        document.getElementById('row').innerHTML += ('<div class="col"><div id="nasa-card" class="card"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + '</h5> <h6 class="card-subtitle mb-2 text-muted"> ' + imageData[i].date + '</h6><p class="card-text">' + imageData[i].explanation + ' </p> </div></div></div>')
       }
     } 
 
