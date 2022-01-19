@@ -46,7 +46,6 @@ form input{
   width: 100%;
 }
 
-
 /* Grid Adjustments */
 .row>* {
   padding: 0;
@@ -85,7 +84,6 @@ form input{
 .card-text{
   font-size: 0.875rem;
 }
-
 
 /* Like Button Styling */
 .like-btn{

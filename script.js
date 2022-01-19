@@ -151,9 +151,5 @@ $form.addEventListener('submit', function (e) {
   });
 });
 
-
-// To do:
-// More keyboard navigation needed
-
-// store title of image and like state,  when retrieved and match found change class
-// change earliest retrieve dates
+// Add Fav Filter
+// Add Favicon
