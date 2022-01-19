@@ -19,4 +19,4 @@ Resource | Purpose | Link
 | :---: | :---: | :---:
 NASA APOD API  | Content used to populate pages | https://api.nasa.gov/
 Bootstrap  | CSS Framework & Icons | https://getbootstrap.com/
-Google Fonts - Inter  | Global Font Change | https://fonts.google.com/specimen/Inter
+Google Fonts | Inter Font | https://fonts.google.com/specimen/Inter
