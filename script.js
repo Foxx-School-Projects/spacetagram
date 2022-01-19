@@ -22,18 +22,77 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJ
 
     // If APOD is a video, use the provided thumbnail
     if (imageData[i].media_type == 'video') { 
-      document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' + '</h5> <p class="card-text">' + imageData[i].explanation + ' </p>     <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off"> <label class="btn btn-outline-primary" for="btn-check-outlined">Like</label> </div></div></div>')
+      document.getElementById('row').innerHTML += ('<div class="card-container unliked"><div id="card-content" class="col"><button type="button" class="like-btn unliked"><i class="bi bi-heart"></i></button><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' + '</h5> <p class="card-text">' + imageData[i].explanation + ' </p>  </div></div></div>')
     
       // otherwise function as expected
     } else { 
-      document.getElementById('row').innerHTML += ('<div class="card-container"><div id="card-content" class="col"><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' +'</h5> <p class="card-text">' + imageData[i].explanation + ' </p>     <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off"> <label class="btn btn-outline-primary" for="btn-check-outlined">Like</label> </div></div></div>')
+      document.getElementById('row').innerHTML += ('<div class="card-container unliked"><div id="card-content" class="col"><button type="button" class="like-btn unliked"><i class="bi bi-heart"></i></button><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' +'</h5> <p class="card-text">' + imageData[i].explanation + ' </p>  </div></div></div>')
     }
   } 
 }) 
 
 
 
-// ======== User Input | Event Listeners ===========
+
+
+// On Click
+document.addEventListener('click', function (e) {
+
+ // Closest Like Button Selected
+ let likeButton = e.target.closest('.like-btn');
+ let likedPost = e.target.closest('.card-container');
+
+ if (likeButton){
+
+  // Change Text
+   if (likeButton.innerHTML == ('<i class="bi bi-heart-fill"></i>')){
+    likeButton.innerHTML = ('<i class="bi bi-heart"></i>')
+    likeButton.style.color = "white";
+
+   } else {
+     
+   likeButton.innerHTML = ('<i class="bi bi-heart-fill"></i>')
+   likeButton.style.color = "gold";
+   }
+
+   likedPost.classList.toggle("unliked");
+   likedPost.classList.toggle("liked");
+
+
+
+
+
+    // ============ Local Storage | Store Data ============
+    // Store Post Title
+    // let PostTitle = e.target.closest('.card-body').querySelector("h5").innerHTML;
+    // console.log('Title:', PostTitle)
+
+    // console.log('button:', likeButton.classList[3])
+    // console.log('post:', likedPost.classList[1])
+
+    
+    // // Store Data
+    // const PostToStore = {
+    //   Title: PostTitle,
+    };
+
+    // Store Info Under 'userFavorites', Convert to string
+    // localStorage.setItem('userLiked', JSON.stringify(PostToStore));
+
+
+ 
+
+
+})
+
+// Store in local and match post to button when retrieved
+
+
+
+
+
+
+// ======== User Date Input | Event Listeners ===========
 
 // Min Date Declaration
 let minDate;
@@ -130,5 +189,6 @@ $form.addEventListener('submit', function (e) {
 // To do:
 // Implement Like button
 // More keyboard navigation needed
+// Alt Text On Images
 
-
+// store title of image and like state,  when retrieved and match found change class
