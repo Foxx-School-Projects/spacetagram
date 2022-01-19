@@ -22,11 +22,11 @@ fetch('https://api.nasa.gov/planetary/apod?api_key=sdcCicWmBL9lc51EcwZNp64dDHpMJ
 
     // If APOD is a video, use the provided thumbnail
     if (imageData[i].media_type == 'video') { 
-      document.getElementById('row').innerHTML += ('<div class="card-container unliked"><div id="card-content" class="col"><button type="button" class="like-btn unliked"><i class="bi bi-heart"></i></button><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' + '</h5> <p class="card-text">' + imageData[i].explanation + ' </p>  </div></div></div>')
+      document.getElementById('row').innerHTML += ('<div class="card-container unliked"><div id="card-content" class="col"><button type="button" class="like-btn unliked"><i class="bi bi-star"></i></button><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' + '</h5> <p class="card-text">' + imageData[i].explanation + ' </p>  </div></div></div>')
     
       // otherwise function as expected
     } else { 
-      document.getElementById('row').innerHTML += ('<div class="card-container unliked"><div id="card-content" class="col"><button type="button" class="like-btn unliked"><i class="bi bi-heart"></i></button><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' +'</h5> <p class="card-text">' + imageData[i].explanation + ' </p>  </div></div></div>')
+      document.getElementById('row').innerHTML += ('<div class="card-container unliked"><div id="card-content" class="col"><button type="button" class="like-btn unliked"><i class="bi bi-star"></i></button><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="nasa APOD"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' +'</h5> <p class="card-text">' + imageData[i].explanation + ' </p>  </div></div></div>')
     }
   } 
 }) 
@@ -45,18 +45,19 @@ document.addEventListener('click', function (e) {
  if (likeButton){
 
   // Change Text
-   if (likeButton.innerHTML == ('<i class="bi bi-heart-fill"></i>')){
-    likeButton.innerHTML = ('<i class="bi bi-heart"></i>')
-    likeButton.style.color = "white";
+   if (likeButton.innerHTML == ('<i class="bi bi-star-fill"></i>')){
+    likeButton.innerHTML = ('<i class="bi bi-star"></i>')
 
    } else {
      
-   likeButton.innerHTML = ('<i class="bi bi-heart-fill"></i>')
-   likeButton.style.color = "gold";
+   likeButton.innerHTML = ('<i class="bi bi-star-fill"></i>')
    }
 
    likedPost.classList.toggle("unliked");
    likedPost.classList.toggle("liked");
+
+   likeButton.classList.toggle("unliked");
+   likeButton.classList.toggle("liked");
 
 
 
@@ -192,3 +193,4 @@ $form.addEventListener('submit', function (e) {
 // Alt Text On Images
 
 // store title of image and like state,  when retrieved and match found change class
+// change earliest retrieve dates

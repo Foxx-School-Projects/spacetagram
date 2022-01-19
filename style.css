@@ -80,8 +80,6 @@ padding: 0;
   border-top-right-radius: 7px;
 }
 
-
-
 /* Image Description Sizing */
 .card-text{
   font-size: 0.875rem;
@@ -93,22 +91,39 @@ padding: 0;
 
 .like-btn{
   color: white;
-  font-size: 2em;
+  font-size: 2.25em;
   border: none;
   background: none;
   margin-top: 0.5em;
-  margin-left: 0.5em;
+  margin-left: 0.5em; 
   margin-right: auto;
   position: absolute;
 }
-
-
-
 
 /* Footer Adjustments */
 footer{
   margin-top: 1em;
   margin-bottom: 1em;
+}
+
+/* Liked Button */
+.liked button{
+  color: #ffc107;
+  animation-name: scaleme;
+  animation-duration: 0.15s;
+  animation-timing-function: linear;
+}
+
+@keyframes scaleme {
+  0%   { transform: scale(1);}
+  50%  { transform: scale(1.2);}
+  100% { transform: scale(1);}
+}
+
+/* Unliked Button */
+.unliked button{
+  transition: 0.2s
+
 }
 
 
@@ -130,8 +145,6 @@ footer{
     margin-bottom: 0;
     padding: 1em;
   }
-
-  
 
 
 }
