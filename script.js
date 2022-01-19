@@ -143,7 +143,7 @@ $form.addEventListener('submit', function (e) {
       // Fill grid with APOD content from past week --- If APOD is a video, use the provided thumbnail --- otherwise perform as usual
       if (imageData[i].media_type == 'video') { 
         document.getElementById('row').innerHTML += ('<div class="card-container unliked"><div id="card-content" class="col"><button type="button" class="like-btn unliked"><i class="bi bi-star"></i></button><img src=' + imageData[i].thumbnail_url + ' class="card-img-top" alt="' + imageData[i].title + '"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' + '</h5> <p class="card-text">' + imageData[i].explanation + ' </p>  </div></div></div>');
-        
+  
       } else { 
         document.getElementById('row').innerHTML += ('<div class="card-container unliked"><div id="card-content" class="col"><button type="button" class="like-btn unliked"><i class="bi bi-star"></i></button><img src=' + imageData[i].hdurl + ' class="card-img-top" alt="' + imageData[i].title + '"> <div class="card-body"> <h5 class="card-title"> ' + imageData[i].title + ' (' + imageData[i].date + ')' +'</h5> <p class="card-text">' + imageData[i].explanation + ' </p>  </div></div></div>');
       }
