@@ -1,17 +1,14 @@
-
 /* General Adjustments */
 body{
   color: black;
   background-color: #f6f6f7;
   font-family: 'Inter', sans-serif;
 }
-
  
 /* Main Header Spacing Adjustment */
 .header{
   margin: 1em;
 }
-
 
 /* Gerneral Font Adjustments */
 .main-heading{
@@ -25,7 +22,6 @@ body{
   font-size: 1rem;
   letter-spacing: -.05rem;
 }
-
 
 /* Form Adjustments */
 
@@ -51,11 +47,10 @@ form input{
 }
 
 
-/* Grid Item Adjustments */
-
-.card-container{
-margin-bottom: 2em;
-padding: 0;
+/* Grid Adjustments */
+.row>* {
+  padding: 0;
+  margin-bottom: 1em;
 }
 
 .col{
@@ -67,12 +62,13 @@ padding: 0;
   height: 100%;
 }
 
-.row>* {
+/* APOD Card Adjustments */
+.card-container{
+  margin-bottom: 2em;
   padding: 0;
-  margin-bottom: 1em;
 }
 
-/* Card Image Adjustments */
+/* Card Image */
 .card-img-top {
   height: 25em;
   object-fit: cover;
@@ -80,15 +76,18 @@ padding: 0;
   border-top-right-radius: 7px;
 }
 
-/* Image Description Sizing */
-.card-text{
-  font-size: 0.875rem;
-}
-
+/* Card Title */
 .card-title{
   font-size: 1rem;
 }
 
+/* Card Description */
+.card-text{
+  font-size: 0.875rem;
+}
+
+
+/* Like Button Styling */
 .like-btn{
   color: white;
   font-size: 2.25em;
@@ -100,38 +99,37 @@ padding: 0;
   position: absolute;
 }
 
+/* Liked Button */
+.liked button{
+  color: #ffc107;
+  animation-name: likedanim;
+  animation-duration: 0.15s;
+  animation-timing-function: linear;
+}
+
+/* Like Button Animation */
+@keyframes likedanim {
+  0%   { transform: scale(1);}
+  50%  { transform: scale(1.2);}
+  100% { transform: scale(1);}
+}
+
+/* Unliked Button Fade on Click */
+.unliked button{
+  transition: 0.2s
+}
+
 /* Footer Adjustments */
 footer{
   margin-top: 1em;
   margin-bottom: 1em;
 }
 
-/* Liked Button */
-.liked button{
-  color: #ffc107;
-  animation-name: scaleme;
-  animation-duration: 0.15s;
-  animation-timing-function: linear;
-}
 
-@keyframes scaleme {
-  0%   { transform: scale(1);}
-  50%  { transform: scale(1.2);}
-  100% { transform: scale(1);}
-}
-
-/* Unliked Button */
-.unliked button{
-  transition: 0.2s
-
-}
-
-
-
-
+/* Tablet Adjustments */
 @media (min-width: 768px) { 
 
-
+  /* Form Adjustments */
   form .btn{
   width: 5em;
   }
@@ -141,6 +139,7 @@ footer{
     display: block;
   }
 
+  /* Grid Card Adjustments */
   .card-container{
     margin-bottom: 0;
     padding: 1em;
