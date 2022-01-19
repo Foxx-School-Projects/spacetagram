@@ -59,14 +59,15 @@ form input{
   border-radius: 7px;
   border: 1.5px solid #b1b1b1;
   height: 100%;
+  background-color: white;
 }
 
 /* APOD Card Adjustments */
 .card-container{
   margin-bottom: 2em;
   padding: 0;
-  background-color: white;
 }
+
 
 /* Card Image */
 .card-img-top {
